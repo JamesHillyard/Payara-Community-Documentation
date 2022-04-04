@@ -8,12 +8,11 @@ NOTE: If no minimum and/or maximum JDK versions are set for a particular JVM opt
 [[versioning-syntax]]
 == Versioning Syntax
 
-JDK versions must follow standard the standard JDK versioning scheme (`1.$MAJOR.$MINOR.$UPDATE`). The syntax that can be used is a bit flexible, allowing the following variants to be correctly interpreted:
+JDK versions must follow standard the standard JDK versioning scheme (`$FEATURE.$INTERIM.$UPDATE.$PATCH`). The syntax that can be used is a bit flexible, allowing the following variants to be correctly interpreted:
 
-* `1.8.0.162`
-* `1.8.0u162`
-* `1.8.0`
-* `1.8`
+* `11.0.5.1`
+* `11.0.5`
+* `11`
 
 [[configuring-jdk-versions]]
 == Configuring JDK Versions
@@ -40,9 +39,9 @@ The `create-jvm-options` asadmin command has been modified to set the minimum an
 +
 [source, shell]
 ----
-asadmin create-jvm-options --target=server-config --min-jvm=1.8.0u162 "-Djava.awt.headless\=true"
+asadmin create-jvm-options --target=server-config --min-jvm=11.0.2 "-Djava.awt.headless\=true"
 
-asadmin create-jvm-options --target=server-config --max-jvm=1.8.0u172 "-XX\:+UnlockDiagnosticVMOptions"
+asadmin create-jvm-options --target=server-config --max-jvm=11.0.5 "-XX\:+UnlockDiagnosticVMOptions"
 ----
 +
 NOTE: When using these arguments to set multiple JVM options, the specified versions will be applied for each option.
@@ -51,18 +50,18 @@ NOTE: When using these arguments to set multiple JVM options, the specified vers
 +
 [source, shell]
 ----
-asadmin create-jvm-options --target=server-config "[1.8.0u162|]-Djava.awt.headless\=true"
+asadmin create-jvm-options --target=server-config "[11|]-Djava.awt.headless\=true"
 
-asadmin create-jvm-options --target=server-config "[|1.8.0u172]-XX\:+UnlockDiagnosticVMOptions"
+asadmin create-jvm-options --target=server-config "[|11]-XX\:+UnlockDiagnosticVMOptions"
 
-asadmin create-jvm-options --target=server-config "[1.8.0u168|1.8.0u172]-XX\:NewRatio\=2"
+asadmin create-jvm-options --target=server-config "[11.0.2|11.0.5]-XX\:NewRatio\=2"
 ----
 +
 You can specify the range for each JVM option when specifying multiple options too:
 +
 [source, shell]
 ----
-asadmin create-jvm-options --target=server-config "-Djava.awt.headless\=true:[|1.8.0u172]-XX\:+UnlockDiagnosticVMOptions:[1.8.0u168|1.8.0u172]-XX\:NewRatio\=2"
+asadmin create-jvm-options --target=server-config "-Djava.awt.headless\=true:[|11.0.2]-XX\:+UnlockDiagnosticVMOptions:[11.0.2|11.0.5]-XX\:NewRatio\=2"
 ----
 
 [[multimode-double-escaping]]
@@ -89,10 +88,10 @@ asadmin> create-jvm-options "-XX\\:MaxPermSize=512m"
 Deleting JVM options is done using either the Admin Console, or the `delete-jvm-options` asadmin command. It is not
 required for you to specify the JDK version braces for deleting a JVM option, though you can if you wish.
 
-For example, given the option "[1.8.0.160|1.8.0.200]XX\:NewRatio=3", either of the following will work:
+For example, given the option "[11.0.2|11.0.5]XX\:NewRatio=3", either of the following will work:
 
 [source, shell]
 ----
 asadmin> delete-jvm-options "XX\:NewRatio=3"
-asadmin> delete-jvm-options "[1.8.0.160|1.8.0.200]XX\:NewRatio=3"
+asadmin> delete-jvm-options "[11.0.2|11.0.5]XX\:NewRatio=3"
 ----

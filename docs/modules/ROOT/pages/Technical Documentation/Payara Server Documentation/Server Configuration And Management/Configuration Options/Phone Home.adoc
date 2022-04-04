@@ -11,7 +11,7 @@ The following is the list of information attributes gathered by the Phone Home s
 |=======================================================================
 |Attribute |Example
 |Payara Server Version |{currentVersion} #badassfish
-|Java Virtual Machine Version |1.8.0_121
+|Java Virtual Machine Version |11.0.5
 |Domain Uptime |36500
 |Number of nodes in the domain |1
 |Number of instances in the domain |2
